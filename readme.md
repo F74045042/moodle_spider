@@ -17,7 +17,7 @@ Python3 版本 `3.6.5`
 
 or
 
-在Terminal輸入
+在Terminal輸入<br>
 `$ git clone https://github.com/F74045042/moodle_spider.git`
 
 ### 執行
