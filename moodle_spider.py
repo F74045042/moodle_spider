@@ -76,6 +76,10 @@ else:
 			print('=========', num,'=========')
 			for td in tr.findAll('td'):
 				print(td.text)
+				for a in td.findAll('a'):
+					sessid = a['href'].split('?')[1].split('&')[0].split('=')[1]
+					sesskey = a['href'].split('?')[1].split('&')[1].split('=')[1]
+					print(sessid, sesskey)
 		print('==================')
 		for i in range(20, 0, -1):
 			print('Loading.... ', i, 'sec'.ljust(4), end='\r', flush=True)
