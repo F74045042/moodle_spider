@@ -79,7 +79,34 @@ else:
 				for a in td.findAll('a'):
 					sessid = a['href'].split('?')[1].split('&')[0].split('=')[1]
 					sesskey = a['href'].split('?')[1].split('&')[1].split('=')[1]
-					print(sessid, sesskey)
+					FORM_URL = 'http://moodle.ncku.edu.tw/mod/attendance/attendance.php?sessid='+sessid+'&sesskey='+sesskey
+					# print(sessid, sesskey)
+					headers = {
+						'Host': 'moodle.ncku.edu.tw',
+						'Connection': 'keep-alive',
+						'Content-Length': '83',
+						'Cache-Control': 'max-age=0',
+						'Origin': 'https://moodle.ncku.edu.tw',
+						'Upgrade-Insecure-Requests': '1',
+						'Content-Type': 'application/x-www-form-urlencoded',
+						'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36',
+						'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+						'Referer': FORM_URL,
+						'Accept-Encoding': 'gzip, deflate, br',
+						'Accept-Language': 'zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7'
+					}
+					payload = {
+						'sessid': sessid,
+						'sesskey': sesskey,
+						'sesskey': sesskey,
+						'_qf_mod_attendance_student_attendance_form': '1',
+						'mform_isexpanded_id_session': '1',
+						'status': '422',
+						'submitbutton': '儲存變更'
+					}
+					print('Attendance form submit... ', end='')
+					res = session_requests.post(FORM_URL, data = payload, headers = headers)
+					print('OK')
 		print('==================')
 		for i in range(20, 0, -1):
 			print('Loading.... ', i, 'sec'.ljust(4), end='\r', flush=True)
